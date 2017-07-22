@@ -3,9 +3,10 @@ $(document).ready(function(){
     require([
         "esri/views/MapView",
         "esri/WebMap",
+        "esri/widgets/Search",
         "dojo/domReady!"
     ], function(
-        MapView, WebMap
+        MapView, WebMap, Search
     ) {
 
         /************************************************************
@@ -29,5 +30,15 @@ $(document).ready(function(){
             map: webmap,
             container: "viewDiv"
         });
+
+        var searchWidget = new Search({
+            view: view
+        });
+
+      // Add the search widget to the very top left corner of the view
+        view.ui.add(searchWidget, {
+            position: "top-right",
+            index: 0
+      });
     });
 });
