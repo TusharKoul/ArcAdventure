@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('hello');
     require([
         "esri/views/MapView",
         "esri/WebMap",
