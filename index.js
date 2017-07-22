@@ -27,6 +27,8 @@ $(document).ready(function(){
          ************************************************************/
         var view = new MapView({
             map: webmap,
+            center: [-100, 35], //united states
+            zoom: 5,
             container: "viewDiv"
         });
 
