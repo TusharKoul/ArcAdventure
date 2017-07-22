@@ -67,9 +67,55 @@
 
     <div id="viewDiv"></div>
 
-
     <div class="col-md-9 col-sm-9"> <!--EMPTY DIV--> </div>
     <div class="col-md-3 col-sm-3 rightpane">
+
+        <ul class="bottom-tab nav nav-tabs nav-justified">
+            <li class="active">
+                <a data-toggle="tab" href="#explore">Explore Map</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#myplan">Your Plan</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="explore" class="tab-pane fade in active">
+                <p>Explore map content goes here</p>
+
+                <div>
+                    <button type="button" class="btn" data-toggle="collapse" data-target="#where">Where</button>
+                    <div id="where" class="collapse">
+                        ADD WHERE UI HERE
+                    </div>
+                </div>
+
+
+                <div>
+                    <button type="button" class="btn" data-toggle="collapse" data-target="#when">When</button>
+                    <div id="when" class="collapse">
+                        ADD WHEN UI HERE
+                    </div>
+
+                </div>
+
+                <div>
+                    <button type="button" class="btn" data-toggle="collapse" data-target="#what">What</button>
+                    <div id="what" class="collapse">
+                        ADD WHAT UI HERE
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div id="myplan" class="tab-pane fade">
+                <p>My current plan goes here</p>
+            </div>
+
+        </div>
+
     </div>
 
 </body>
