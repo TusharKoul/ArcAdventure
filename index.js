@@ -134,23 +134,26 @@ function jQueryReady() {
     $('.what-toggle').click(function() {
 
         if($(this).hasClass('on')) {
-            $(this).val('100'); // Set the value of your choice
             $(this).removeClass('on');
             $(this).addClass('off');
-            // Set the message of your choice and you can delete +$(this).val() after '
-            console.log('option is off');
+
+            let newSource = $(this).find('img').attr('src').replace("blue","gray");
+            $(this).find('img').attr('src',newSource);
+
+            let newHoverText = $(this).find('p').text().replace("hide","show");
+            $(this).find('p').text(newHoverText);
+
         }
-
         else if($(this).hasClass('off')) {
-            $(this).val('200'); // Set the value of your choice
-
             $(this).removeClass('off');
             $(this).addClass('on');
 
-            // Set the message of your choice and you can delete +$(this).val() after '
-            console.log('option is on');
+            let newSource = $(this).find('img').attr('src').replace("gray","blue");
+            $(this).find('img').attr('src',newSource);
+
+            let newHoverText = $(this).find('p').text().replace("show","hide");
+            $(this).find('p').text(newHoverText);
         }
-
     });
-
 }
+
