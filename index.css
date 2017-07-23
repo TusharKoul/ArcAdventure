@@ -37,3 +37,7 @@ body{
 .what-toggle.off {
     background-color: inherit;
 }
+
+.plan-item-container {
+    height: 100px;
+}
