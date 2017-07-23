@@ -81,12 +81,11 @@ require([
     };
 
     var template = {
-    title: "{Location}",
-    actions: [addToPlan],
-    content:
-      "<ul><li> Website:  https://www.nps.gov/zion/index.htm</li>" +
-      "<li>Description: {Descriptio}</li>" +
-      "<li>{FID} are divorced</li></ul>"
+        title: "{Location}",
+        content:
+        "<ul><li>Address: {Address}</li>" +
+        "<li>Description: {Descript}</li></ul>",
+        actions: [addToPlan]
     };
 
     function addToPlanner(event) {
@@ -118,7 +117,7 @@ require([
     });
 
     trailsLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionNPTrails/FeatureServer",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZION_TRANS_Trail_ln/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:lineRenderer
@@ -131,7 +130,7 @@ require([
         symbol:waterSymbol
     });
     waterAccessLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_River_Access/FeatureServer",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/River_Access_/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:waterRenderer
@@ -144,7 +143,7 @@ require([
         symbol:campSymbol
     });
     campLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionCampgrounds/FeatureServer2",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Campground_/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:campRenderer
@@ -157,7 +156,7 @@ require([
         symbol:picnicSymbol
     });
     picnicLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Picnic_Tables/FeatureServer",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Picnic_Tables/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:picnicRenderer
@@ -170,7 +169,7 @@ require([
         symbol:visitorSymbol
     });
     visitorLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Visitor_Center/FeatureServer",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Visitor_Center_/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:visitorRenderer
@@ -183,7 +182,7 @@ require([
         symbol:hikeSymbol
     });
     hikeLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Overlooks/FeatureServer",
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Overlook_/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:hikeRenderer
@@ -254,10 +253,6 @@ require([
 });
 
 
-
-
-
-function jQueryReady() {
-
+function addToMyPlan(attributes){
+    console.log(attributes);
 }
-
