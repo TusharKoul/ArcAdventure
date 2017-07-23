@@ -16,9 +16,10 @@ require([
     "esri/renderers/SimpleRenderer",
     "esri/symbols/SimpleMarkerSymbol",
     "esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleFillSymbol",
     "dojo/domReady!"
 ], function(
-    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol,SimpleLineSymbol
+    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol,SimpleLineSymbol, SimpleFillSymbol
 ) {
 
     /************************************************************
@@ -36,7 +37,7 @@ require([
     // });
 
      var map = new Map({
-        basemap: "gray"
+        basemap: "streets"
     });
 
     var view = new MapView({
@@ -189,17 +190,45 @@ require([
     });
     map.add(hikeLayer);
 
+    var fill = new SimpleFillSymbol({
+        outline: {
+            width: 1,
+            color: [161, 217, 155, 0.59]
+        },
+        color: [161, 217, 155, 0.56]
+    });
+
+    var fillRenderer = new SimpleRenderer({
+        symbol:fill
+    });
+
 
     var featureLayer6 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/NPS_Boundary/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:fillRenderer
     });
     map.add(featureLayer6);
+
+
+    var fill2 = new SimpleFillSymbol({
+        outline: {
+            width: 1,
+            color: [38, 115, 0, 1]
+        },
+        color: [38, 115, 0, 0.56]
+    });
+
+    var fill2Renderer = new SimpleRenderer({
+        symbol:fill2
+    });
+
     var featureLayer7 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/USFS_boundaries/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer: fill2Renderer
     });
     map.add(featureLayer7);
 
