@@ -2,9 +2,10 @@ require([
     "esri/views/MapView",
     "esri/WebMap",
     "esri/widgets/Search",
+    "esri/widgets/LayerList",
     "dojo/domReady!"
 ], function(
-    MapView, WebMap, Search
+    MapView, WebMap, Search, LayerList
 ) {
 
     /************************************************************
@@ -34,6 +35,13 @@ require([
     var searchWidget = new Search({
         // view: view,
         container:"search-container"
+    });
+
+    view.then(function() {
+        var layerList = new LayerList({
+            view: view
+        });
+        view.ui.add(layerList, "top-left");
     });
 
 
