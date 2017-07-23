@@ -1,3 +1,10 @@
+let trailsLayer;
+let waterAccessLayer;
+let picnicLayer;
+let campLayer;
+let visitorLayer;
+let hikeLayer;
+
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -82,14 +89,16 @@ require([
       "<li>{FID} are divorced</li></ul>"
     };
 
-    function addToPlanner() {
-        console.log("will add to plan");
+    function addToPlanner(event) {
+        console.log(event);
+        console.log(view.popup.selectedFeature);
+
     }
 
     view.popup.on("trigger-action", function(event) {
     // Execute the measureThis() function if the measure-this action is clicked
         if (event.action.id === "add-to-plan") {
-            addToPlanner();
+            addToPlanner(event);
         }
     });
 
@@ -107,72 +116,79 @@ require([
     var lineRenderer = new SimpleRenderer({
         symbol:line
     });
-    var featureLayer = new FeatureLayer({
+
+    trailsLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionNPTrails/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:lineRenderer
     });
+    map.add(trailsLayer);
 
 
     let waterSymbol = new PictureMarkerSymbol('resources/images/pins/water-access-pin.png', 30, 30);
     var waterRenderer = new SimpleRenderer({
         symbol:waterSymbol
     });
-    var featureLayer1 = new FeatureLayer({
+    waterAccessLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_River_Access/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:waterRenderer
     });
+    map.add(waterAccessLayer);
 
 
     let campSymbol = new PictureMarkerSymbol('resources/images/pins/camp-pin.png', 30, 30);
     var campRenderer = new SimpleRenderer({
         symbol:campSymbol
     });
-    var featureLayer2 = new FeatureLayer({
+    campLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionCampgrounds/FeatureServer2",
         outFields: ["*"],
         popupTemplate: template,
         renderer:campRenderer
     });
+    map.add(campLayer);
 
 
     let picnicSymbol = new PictureMarkerSymbol('resources/images/pins/picnic-pin.png', 30, 30);
     var picnicRenderer = new SimpleRenderer({
         symbol:picnicSymbol
     });
-    var featureLayer3 = new FeatureLayer({
+    picnicLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Picnic_Tables/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:picnicRenderer
     });
+    map.add(picnicLayer);
 
 
     let visitorSymbol = new PictureMarkerSymbol('resources/images/pins/visitor-pin.png', 30, 30);
     var visitorRenderer = new SimpleRenderer({
         symbol:visitorSymbol
     });
-    var featureLayer4 = new FeatureLayer({
+    visitorLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Visitor_Center/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:visitorRenderer
     });
+    map.add(visitorLayer);
 
 
     let hikeSymbol = new PictureMarkerSymbol('resources/images/pins/hike-pin.png', 30, 30);
     var hikeRenderer = new SimpleRenderer({
         symbol:hikeSymbol
     });
-    var featureLayer5 = new FeatureLayer({
+    hikeLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Overlooks/FeatureServer",
         outFields: ["*"],
         popupTemplate: template,
         renderer:hikeRenderer
     });
+    map.add(hikeLayer);
 
 
     var featureLayer6 = new FeatureLayer({
@@ -180,60 +196,68 @@ require([
         outFields: ["*"],
         popupTemplate: template
     });
+    map.add(featureLayer6);
     var featureLayer7 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/USFS_boundaries/FeatureServer",
         outFields: ["*"],
         popupTemplate: template
     });
-
-    map.add(featureLayer);
-    map.add(featureLayer1);
-    map.add(featureLayer2);
-    map.add(featureLayer3);
-    map.add(featureLayer4);
-    map.add(featureLayer5);
-    map.add(featureLayer6);
     map.add(featureLayer7);
+
+
+    // map.add(featureLayer1);
+    // map.add(featureLayer2);
+    // map.add(featureLayer3);
+    // map.add(featureLayer4);
+    // map.add(featureLayer5);
+    // map.add(featureLayer6);
+    // map.add(featureLayer7);
+
+
+    let jQueryReady = function() {
+        console.log($("#where-range-picker").value);
+
+        $("#where-range-picker").on("input change", function() {
+            let val = $("#where-range-picker").val();
+            $("#where-range-input").val(val)
+        });
+
+        $("#where-range-input").on("input change", function() {
+            let val = $("#where-range-input").val();
+            $("#where-range-picker").val(val)
+        });
+
+        $('.what-toggle').click(function() {
+
+            if($(this).hasClass('on')) {
+                $(this).removeClass('on');
+                $(this).addClass('off');
+
+                let newSource = $(this).find('img').attr('src').replace("blue","gray");
+                $(this).find('img').attr('src',newSource);
+
+                let newHoverText = $(this).find('p').text().replace("hide","show");
+                $(this).find('p').text(newHoverText);
+            }
+            else if($(this).hasClass('off')) {
+                $(this).removeClass('off');
+                $(this).addClass('on');
+
+                let newSource = $(this).find('img').attr('src').replace("gray","blue");
+                $(this).find('img').attr('src',newSource);
+
+                let newHoverText = $(this).find('p').text().replace("show","hide");
+                $(this).find('p').text(newHoverText);
+            }
+        });
+    }
 });
 
 
 
+
+
 function jQueryReady() {
-    console.log($("#where-range-picker").value);
 
-    $("#where-range-picker").on("input change", function() {
-        let val = $("#where-range-picker").val();
-        $("#where-range-input").val(val)
-    });
-
-    $("#where-range-input").on("input change", function() {
-        let val = $("#where-range-input").val();
-        $("#where-range-picker").val(val)
-    });
-
-    $('.what-toggle').click(function() {
-
-        if($(this).hasClass('on')) {
-            $(this).removeClass('on');
-            $(this).addClass('off');
-
-            let newSource = $(this).find('img').attr('src').replace("blue","gray");
-            $(this).find('img').attr('src',newSource);
-
-            let newHoverText = $(this).find('p').text().replace("hide","show");
-            $(this).find('p').text(newHoverText);
-
-        }
-        else if($(this).hasClass('off')) {
-            $(this).removeClass('off');
-            $(this).addClass('on');
-
-            let newSource = $(this).find('img').attr('src').replace("gray","blue");
-            $(this).find('img').attr('src',newSource);
-
-            let newHoverText = $(this).find('p').text().replace("show","hide");
-            $(this).find('p').text(newHoverText);
-        }
-    });
 }
 
