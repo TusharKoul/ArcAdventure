@@ -87,7 +87,7 @@ function jQueryReady() {
             $(this).addClass('off');
             // Set the message of your choice and you can delete +$(this).val() after '
 
-            let newSource = $(this).find('img').attr('src').replace("red","gray");
+            let newSource = $(this).find('img').attr('src').replace("blue","gray");
             $(this).find('img').attr('src',newSource);
 
             let newHoverText = $(this).find('p').text().replace("hide","show");
@@ -104,7 +104,7 @@ function jQueryReady() {
             console.log($(this));
             console.log($(this).find('img').attr('src'));
 
-            let newSource = $(this).find('img').attr('src').replace("gray","red");
+            let newSource = $(this).find('img').attr('src').replace("gray","blue");
             $(this).find('img').attr('src',newSource);
 
             let newHoverText = $(this).find('p').text().replace("show","hide");
