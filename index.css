@@ -78,3 +78,40 @@ body{
     opacity:1;
     /*transition:opacity 0.5s linear;*/
 }
+
+.plan-item-image{
+
+    /*border-radius: 50%;*/
+
+}
+
+.plan-item-image img {
+    height: 60px;
+    border-radius: 30%;
+    border:2px solid black;
+}
+
+.plan-item-image i {
+    font-size: 30px;
+    margin-top:10px;
+    margin-left: 20px;
+}
+
+.plan-item-container {
+    /*border-bottom:1px solid black;*/
+    margin-top: 15px;
+}
+
+.line-separator {
+    height: 1px;
+    background-color: black;
+    width: 70%;
+    margin-left: 30%;
+}
+
+.plan-item-add i {
+    font-size: 45px;
+    margin-left:9px;
+}
+
+
