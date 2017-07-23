@@ -21,11 +21,19 @@ body{
     margin:0;
     height:calc(100% - 50px);
     background-color: gray;
-    opacity: 0.6;
+    /*opacity: 0.6;*/
     padding:0 !important;
 }
 
 .bottom-tab{
     position: absolute;
     bottom:0;
+}
+
+.what-toggle.on {
+    background-color: darkred;
+}
+
+.what-toggle.off {
+    background-color: inherit;
 }
