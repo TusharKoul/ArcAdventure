@@ -17,9 +17,12 @@ require([
     "esri/symbols/SimpleMarkerSymbol",
     "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleFillSymbol",
+    "esri/layers/Layer",
+    "esri/layers/FeatureLayer",
     "dojo/domReady!"
 ], function(
-    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol,SimpleLineSymbol, SimpleFillSymbol
+    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol,SimpleLineSymbol,
+    SimpleFillSymbol, Layer,FeatureLayer
 ) {
 
     /************************************************************
@@ -92,7 +95,8 @@ require([
     function addToPlanner(event) {
         console.log(event);
         console.log(view.popup.selectedFeature);
-
+        console.log(view.popup.selectedFeature.layer.title);
+        addToMyPlan(view.popup.selectedFeature);
     }
 
     view.popup.on("trigger-action", function(event) {
@@ -282,6 +286,69 @@ require([
 });
 
 
-function addToMyPlan(attributes){
-    console.log(attributes);
+function addToMyPlan(selectedFeature){
+    let img = "";
+    let name = "Zion National Park";
+    let des = "";
+    let time ="";
+    console.log(selectedFeature.layer.title);
+    if(selectedFeature.layer.title == "Overlook") {
+     console.log('kjhkashdlkjh');
+    }
+
+    let title = selectedFeature.layer.title.trim();
+    if(title == "Visitor Center"){
+        img = "resources/images/visiter-center-red.png";
+        time = "1 hours"
+    }
+    else if(title == "Overlook"){
+        img = "resources/images/lookout-point-red.png";
+        time = "3 hours"
+    }
+    else if(title === "Picnic Tables"){
+        img = "resources/images/picnic-red.png";
+        time = "2 hours"
+    }
+    else if(title == "Campground"){
+        name = selectedFeature.attributes.UnitName;
+        des = title;
+        img = "resources/images/campground-red.png";
+        time = "4 hours"
+    }
+    else if(title == "River Access"){
+        img = "resources/images/fishing-red.png";
+        time = "30 mins"
+    }
+    else if(title == "ZION TRANS Trail ln"){
+        img = "resources/images/hike-red.png";
+        time = "2 hours"
+    }
+
+    let str = '<div class="plan-item-container">';
+    str += '<div class="col-md-3 plan-item-image">';
+    str += '<img src=' + img + '>';
+    str += '<i class="fa fa-long-arrow-down" aria-hidden="true"></i>';
+    str += '</div>';
+    str += '<div class="col-md-9 plan-item-details">';
+    str += '<p>' + name + '</p>';
+    str += '<p>' + title + '</p>';
+    str += '<p>' + time + '</p>';
+    str += '</div>';
+    str += '</div>';
+    str += '<div class="line-separator"></div>';
+
+    $(str).insertBefore($('#plan-item-add-container'));
+
+    // <div class="plan-item-container">
+    //     <div class="col-md-3 plan-item-image">
+    //         <img src="resources/images/visiter-center-red.png">
+    //         <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+    //     </div>
+    //     <div class="col-md-9 plan-item-details">
+    //         <p> Zion National Park </p>
+    //         <p> Visitor Center </p>
+    //         <p> 2 hours </p>
+    //     </div>
+    // </div>
+    // <div class="line-separator"></div>
 }
