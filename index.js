@@ -83,8 +83,8 @@ require([
     var template = {
         title: "{Location}",
         content:
-        "<ul><li>Address: {Address}</li>" +
-        "<li>Description: {Descript}</li></ul>",
+        "<ul><li>{Descript}</li></ul>" +
+        "<ul><li>Address: {Address}</li></ul>",
         actions: [addToPlan]
     };
 
