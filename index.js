@@ -8,9 +8,10 @@ require([
     "esri/symbols/PictureMarkerSymbol",
     "esri/renderers/SimpleRenderer",
     "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleLineSymbol",
     "dojo/domReady!"
 ], function(
-    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol
+    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol,SimpleLineSymbol
 ) {
 
     /************************************************************
@@ -28,7 +29,7 @@ require([
     // });
 
      var map = new Map({
-        basemap: "streets"
+        basemap: "gray"
     });
 
     var view = new MapView({
@@ -95,15 +96,35 @@ require([
 
     // Reference the popupTemplate instance in the
     // popupTemplate property of FeatureLayer
+
+    var line = new SimpleLineSymbol({
+        style: "short-dash-dot",
+        cap: "round",
+        join: "round",
+        width: 2,
+        color: [0, 169, 230, 1]
+    });
+
+    var lineRenderer = new SimpleRenderer({
+        symbol:line
+    });
+
     var featureLayer = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionNPTrails/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:lineRenderer
+    });
+
+    let waterSymbol = new PictureMarkerSymbol('resources/images/pins/water-access-pin.png', 30, 30);
+    var waterRenderer = new SimpleRenderer({
+        symbol:waterSymbol
     });
     var featureLayer1 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_River_Access/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:waterRenderer
     });
 
     var featureLayer2 = new FeatureLayer({
