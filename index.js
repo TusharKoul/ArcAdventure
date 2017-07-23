@@ -5,9 +5,12 @@ require([
     "esri/widgets/Search",
     "esri/widgets/LayerList",
     "esri/layers/FeatureLayer",
+    "esri/symbols/PictureMarkerSymbol",
+    "esri/renderers/SimpleRenderer",
+    "esri/symbols/SimpleMarkerSymbol",
     "dojo/domReady!"
 ], function(
-    Map, MapView, WebMap, Search, LayerList, FeatureLayer,
+    Map, MapView, WebMap, Search, LayerList, FeatureLayer, PictureMarkerSymbol, SimpleRenderer, SimpleMarkerSymbol
 ) {
 
     /************************************************************
@@ -37,13 +40,14 @@ require([
 
     var searchWidget = new Search({
         view: view,
-        //container:"search-container"
+        map:map,
+        container:"search-container"
     });
-    view.ui.add(searchWidget, {
-        position: "top-left",
-        index: 0
-      });
-    
+
+    searchWidget.on("search-complete",function(event){
+        console.log(event);
+    });
+
     view.then(function() {
         var layerList = new LayerList({
             view: view
@@ -88,26 +92,50 @@ require([
         outFields: ["*"],
         popupTemplate: template
     });
+
     var featureLayer2 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/ZionCampgrounds/FeatureServer2",
         outFields: ["*"],
         popupTemplate: template
     });
+
+    let picnicSymbol = new PictureMarkerSymbol('resources/images/pins/picnic-pin.png', 30, 30);
+    var picnicRenderer = new SimpleRenderer({
+        symbol:picnicSymbol
+    });
+
     var featureLayer3 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Picnic_Tables/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:picnicRenderer
+    });
+
+    let visitorSymbol = new PictureMarkerSymbol('resources/images/pins/visitor-pin.png', 30, 30);
+    var visitorRenderer = new SimpleRenderer({
+        symbol:visitorSymbol
     });
     var featureLayer4 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Visitor_Center/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:visitorRenderer
+    });
+
+    let hikeSymbol = new PictureMarkerSymbol('resources/images/pins/hike-pin.png', 30, 30);
+    var hikeRenderer = new SimpleRenderer({
+        symbol:hikeSymbol
     });
     var featureLayer5 = new FeatureLayer({
         url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/Zion_Overlooks/FeatureServer",
         outFields: ["*"],
-        popupTemplate: template
+        popupTemplate: template,
+        renderer:hikeRenderer
     });
+
+
+
+
     map.add(featureLayer);
     map.add(featureLayer1);
     map.add(featureLayer2);
