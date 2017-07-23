@@ -61,20 +61,33 @@ require([
         console.log("The view's resources failed to load: ", error);
     });
 
-    var template = {
-    title: "Marriage in NY, Zip Code: {ZIP}",
-    content: "<p>As of 2015, <b>{MARRIEDRATE}%</b> of the population in this zip code is married.</p>" +
-      "<ul><li>{FID} people are married</li>" +
-      "<li>{FID} have never married</li>" +
-      "<li>{FID} are divorced</li></ul>",
-    fieldInfos: [{
-      fieldName: "FID",
-      format: {
-        digitSeparator: true, // Use a comma separator for large numbers
-        places: 0 // Sets the number of decimal places to 0 and rounds up
-      }
-    }]
+
+    var addToPlan = {
+        title: "Add To Plan",
+        id: "add-to-plan",
+        image: "addIcon.png"
     };
+
+    var template = {
+    title: "{Location}",
+    actions: [addToPlan],
+    content:
+      "<ul><li> Website:  https://www.nps.gov/zion/index.htm</li>" +
+      "<li>Description: {Descriptio}</li>" +
+      "<li>{FID} are divorced</li></ul>"
+    };
+
+    function addToPlanner() {
+        console.log("will add to plan");
+    }
+
+    view.popup.on("trigger-action", function(event) {
+    // Execute the measureThis() function if the measure-this action is clicked
+        if (event.action.id === "add-to-plan") {
+            addToPlanner();
+        }
+    });
+
 
     // Reference the popupTemplate instance in the
     // popupTemplate property of FeatureLayer
@@ -108,12 +121,24 @@ require([
         outFields: ["*"],
         popupTemplate: template
     });
+    var featureLayer6 = new FeatureLayer({
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/NPS_Boundary/FeatureServer",
+        outFields: ["*"],
+        popupTemplate: template
+    });
+    var featureLayer7 = new FeatureLayer({
+        url: "https://services8.arcgis.com/XKQO68YBFBIpiRAM/arcgis/rest/services/USFS_boundaries/FeatureServer",
+        outFields: ["*"],
+        popupTemplate: template
+    });
     map.add(featureLayer);
     map.add(featureLayer1);
     map.add(featureLayer2);
     map.add(featureLayer3);
     map.add(featureLayer4);
     map.add(featureLayer5);
+    map.add(featureLayer6);
+    map.add(featureLayer7);
 });
 
 
