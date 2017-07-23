@@ -20,9 +20,9 @@ body{
     right:0;
     margin:0;
     height:calc(100% - 50px);
-    background-color: gray;
-    /*opacity: 0.6;*/
-    padding:0 !important;
+    background-color: white;
+    opacity: 0.9;
+    padding:0 10px 0 10px !important;
 }
 
 .bottom-tab{
@@ -40,4 +40,16 @@ body{
 
 .plan-item-container {
     height: 100px;
+}
+
+.collapse-icon {
+    padding-left: 20px;
+}
+
+.toggle-btn{
+    width:100%;
+    text-align: left;
+    margin-bottom: 15px;
+    border-width: 2px;
+    border-color: black;
 }

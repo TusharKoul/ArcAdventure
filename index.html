@@ -29,6 +29,9 @@
     <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>-->
     <!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />-->
 
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+
 
     <!--INTERNAL-->
     <link rel="stylesheet" href="index.css">
@@ -97,9 +100,16 @@
                 <p>Explore map content goes here</p>
 
                 <div>
-                    <div type="button" class="btn" data-toggle="collapse" data-target="#where">Where</div>
+                    <div type="button" class="btn toggle-btn" data-toggle="collapse" data-target="#where">
+                        <div class="col-md-3">
+                            WHERE
+                        </div>
+                        <div class="col-md-7"></div>
+                        <div class="col-md-1">
+                            <i class="fa fa-chevron-down collapse-icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
                     <div id="where" class="collapse">
-                        ADD WHERE UI HERE
                         <div id="search-container"></div>
                         <input type="range" id="where-range-picker" value="90" min="10" max="500">
                         <input type="text" id="where-range-input"> miles
@@ -108,16 +118,31 @@
 
 
                 <div>
-                    <div type="button" class="btn" data-toggle="collapse" data-target="#when">When</div>
+                    <div type="button" class="btn toggle-btn" data-toggle="collapse" data-target="#when">
+                        <div class="col-md-3">
+                            WHEN
+                        </div>
+                        <div class="col-md-7"></div>
+                        <div class="col-md-1">
+                            <i class="fa fa-chevron-down collapse-icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
                     <div id="when" class="collapse">
-                        ADD WHEN UI HERE
                         <p>From: <input type="text" id="from-datepicker"></p>
                         <p>To: <input type="text" id="to-datepicker"></p>
                     </div>
                 </div>
 
                 <div>
-                    <div type="button" class="btn" data-toggle="collapse" data-target="#what">What</div>
+                    <div type="button" class="btn toggle-btn" data-toggle="collapse" data-target="#what">
+                        <div class="col-md-3">
+                            WHAT
+                        </div>
+                        <div class="col-md-7"></div>
+                        <div class="col-md-1">
+                            <i class="fa fa-chevron-down collapse-icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
                     <div id="what" class="collapse">
                         ADD WHAT UI HERE
                         <button class="what-toggle off">
