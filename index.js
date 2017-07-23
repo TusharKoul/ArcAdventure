@@ -33,10 +33,14 @@ require([
     });
 
     var searchWidget = new Search({
-        // view: view,
-        container:"search-container"
+        view: view,
+        //container:"search-container"
     });
-
+    view.ui.add(searchWidget, {
+        position: "top-left",
+        index: 0
+      });
+    
     view.then(function() {
         var layerList = new LayerList({
             view: view
